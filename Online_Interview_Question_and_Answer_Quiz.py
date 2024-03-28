@@ -28,7 +28,7 @@ class Quiz:
             print(f"{i+1}. {choice}")
         start_time = time.time()
         try:
-            user_choice = int(input("Enter your choice between 1 and 4. If you want to exit, press 5: "))
+            user_choice = int(input("Your Time is 10 sec for each Question\nEnter your choice between 1 and 4. If you want to exit, press 5: "))
 
             # For Count Total Time
             elapsed_time = time.time() - start_time
