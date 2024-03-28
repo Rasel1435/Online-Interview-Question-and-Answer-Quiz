@@ -1,4 +1,5 @@
 import random
+import time
 
 class Quiz:
     def __init__(self) -> None:
@@ -19,16 +20,29 @@ class Quiz:
         ]
 
         self.correct_choice = [0, 0, 0, 3, 1]
-        
-    def exam_question(self, question, choices):
+        self.total_time = 0  # To store the total time spent
+
+    def exam_question(self, question, choices, time_limit=10):
         print(question)
         for i, choice in enumerate(choices):
             print(f"{i+1}. {choice}")
+        start_time = time.time()
         try:
             user_choice = int(input("Enter your choice between 1 and 4. If you want to exit, press 5: "))
+
+            # For Count Total Time
+            elapsed_time = time.time() - start_time
+            self.total_time += elapsed_time 
+
+            if elapsed_time > time_limit:
+                print(f"Time's up!. \nYou took {elapsed_time:.2f} seconds to answer the question.")
+                return None
+            
+            # if user want to exit
             if user_choice == 5:
                 print("Thanks for playing!")
                 exit()
+                
             elif user_choice < 1 or user_choice > len(choices):
                 raise ValueError("Please enter a number between 1 and 4.")
             return user_choice - 1
@@ -36,7 +50,6 @@ class Quiz:
             print(e)
             return self.exam_question(question, choices)
 
-        
     def lets_play_the_game(self):
         print("Welcome to the interview board! ")
         score = 0
@@ -45,12 +58,12 @@ class Quiz:
             user_choice = self.exam_question(self.questions[i], self.answers[i])
             if user_choice == self.correct_choice[i]:
                 print("Correct!")
+                print(f"The correct answer is: {self.answers[i][self.correct_choice[i]]}")
                 score += 1
             else:
-                print("Oops! That's incorrect.")
+                print("Oops! That's incorrect. Better Luck next time")
         print(f"\nYou got {score} out of {len(self.questions)} questions correct.")
-                   
-            
+        print(f"Total time spent: {self.total_time:.2f} seconds.")
 
 if __name__ == "__main__":
     quiz = Quiz()
