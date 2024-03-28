@@ -28,14 +28,14 @@ class Quiz:
             print(f"{i+1}. {choice}")
         start_time = time.time()
         try:
-            user_choice = int(input("\nYour Time is 10 sec for each Question-->\nEnter your choice between 1 and 4. If you want to exit, press 5: "))
+            user_choice = int(input("\n(Your Time is 10 sec for each Question)\nEnter your choice between 1 and 4. If you want to exit, press 5: "))
 
             # For Count Total Time
             elapsed_time = time.time() - start_time
             self.total_time += elapsed_time 
 
             if elapsed_time > time_limit:
-                print(f"\nTime's up!. \nYou took {elapsed_time:.2f} seconds to answer the question.")
+                print(f"Time's up!. \nYou took {elapsed_time:.2f} seconds to answer the question.")
                 return None
             
             # if user want to exit
@@ -57,7 +57,7 @@ class Quiz:
             print(f"\nQuestion {i+1}:")
             user_choice = self.exam_question(self.questions[i], self.answers[i])
             if user_choice == self.correct_choice[i]:
-                print("\nCorrect!")
+                print("Correct!")
                 print(f"The correct answer is: {self.answers[i][self.correct_choice[i]]}")
                 score += 1
             else:
